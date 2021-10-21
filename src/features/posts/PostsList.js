@@ -3,7 +3,7 @@ import { Spinner } from "../../components/Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { PostAuthor } from "./PostAuthor";
-import { ReactionButtons } from "./ReactionButtons";
+import { ReactionButton } from "./ReactionButtons";
 import { TimeAgo } from "./TimeAgo";
 import { selectAllPosts, fetchPosts } from "./postsSlice";
 
@@ -17,7 +17,7 @@ const PostExcerpt = ({ post }) => {
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
-      <ReactionButtons post={post} />
+      <ReactionButton post={post} />
       <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
       </Link>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewPost } from "./postsSlice";
+import { addNewPost, fetchPosts } from "./postsSlice";
 
 import { postAdded } from "./postsSlice";
 
@@ -28,6 +28,7 @@ export const AddPostForm = () => {
       try {
         setAddRequestStatus("pending");
         await dispatch(addNewPost({ title, content, user: userId })).unwrap();
+        
         setTitle("");
         setContent("");
         setUserId("");
@@ -35,6 +36,7 @@ export const AddPostForm = () => {
         console.error("Failed to save the post: ", err);
       } finally {
         setAddRequestStatus("idle");
+        //dispatch(fetchPosts())
       }
     }
   };

@@ -34,22 +34,6 @@ const postSlice = createSlice({
         exsistingPost.reactions[reaction]++;
       }
     },
-    postAdded: {
-      reducer(state, action) {
-        state.posts.push(action.payload);
-      },
-      prepare(title, content, userId) {
-        return {
-          payload: {
-            id: nanoid(),
-            date: new Date().toISOString(),
-            title,
-            content,
-            user: userId
-          }
-        };
-      }
-    },
     postUpdated(state, action) {
       const { id, title, content } = action.payload;
       const exsistingPost = state.posts.find((post) => post.id === id);
@@ -73,10 +57,11 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
-    builder.addCase(addNewPost.fulfilled, (state, action) => {
-      // We can directly add the new post object to our posts array
-      state.posts.push(action.payload);
-    });
+
+    builder
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      });
   }
 });
 
